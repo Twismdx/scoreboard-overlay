@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="#">
+    <title>Scoreboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+	<meta name="application-name" content="CueScore scoreboard" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="https://cuescore.com/css/cuescore.css?v=1.9" rel="stylesheet" type="text/css">
+    </head>
+<body>  
+<div id="streamoverlay">  
+  <div id="scoreboardBox">
+    <div class="borderline"><div></div></div>
+	<div class="line1">
+      <div class="imgPlayerA" ><div class="flagA" ></div></div>
+      <div class="imgPlayerB" ><div class="flagB" ></div></div>
+    </div>
+    <div class="line2">
+      <div id="namePlayerA" class="name"><span class="firstname"></span> <span class="lastname"></span> <span class="handicap"></span></div>
+      <div id="scorePlayerA"></div>
+      <div class="separator">-</div>
+      <div id="scorePlayerB"></div>
+      <div id="namePlayerB" class="name"> <span class="lastname"></span> <span class="handicap"></span></div>
+    </div>
+    <div class="line3">
+      <div id="table"><span>Empire Bar & Pool</span></div>
+      <div id="avgIngA" style="display: none;">Innings <span class="innings"></span> &nbsp; Average <span class="average"></span></div>
+      <div id="matchinfo"><span></span></div>
+      <div id="avgIngB" style="display: none;">Innings <span class="innings"></span> &nbsp; Average <span class="average"></span></div>
+      <div id="round"><span></span></div>  
+    </div>
+  </div>  
+ </div>  
+</body>
+</html>

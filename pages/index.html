@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="google-site-verification" content="63w_q9K_rY2Z-SFqTWvOF9GLnxQiJEjaSHZXfbtAWsE" />
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="#">
+    <title>Scoreboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+	<meta name="application-name" content="CueScore scoreboard" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="https://cuescore.com/css/cuescore.css?v=1.9" rel="stylesheet" type="text/css">
+	<script>
+fetch(url = 'https://www.poolstat.net.au/livestream/multimatch?ids=422945&api=1', data = {}, {
+	method: 'GET',
+	mode: 'cors',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+})
+	.then(response => response.json())
+	.then(function json2array(json){
+		var result = [];
+        var keys = Object.keys(json);
+        keys.forEach(function(key){
+			result.push(json[key]);
+			$("#namePlayerA").empty().html(json[key].hometeamlabe);
+			$("#namePlayerB").empty().html(json[key].awayteamlabe);
+			$("#scorePlayerA").empty().html(json[key].homescore);
+			$("#scorePlayerB").empty().html(json[key].awayscore);
+			$("#matchinfo").empty().html(json[key].compname);
+		});
+		return result;
+	});
+    </script>   
+    <style>	
+html, body { background-color: transparent !important; }
+body { /*background-image: url(cuescore.com/img/scoreboard/test-background.png); background-size: cover; */}
+    
+#infoBox { margin: 40px; display: flex; }
+.owner { position: relative; width: 84px; height: 97px; background: transparent url(/img/hexagon.svg) center center / cover no-repeat; /*box-shadow: 8px 0px 13px -4px rgba(0, 0, 0, 0.3);*/ z-index: 10; filter: drop-shadow(0 1px 6px rgba(50,50,50,.5)); }
+.owner div { position: absolute; width: 83px; height: 96px; background: transparent url(/img/CS_logo.png) center center no-repeat; }    
+
+.tournament {  }
+.tournament .datelocation { padding-left: 15px; text-shadow: 1px 1px 4px #000000; font-size: 12px; line-height: 24px; max-width: 170px; white-space: nowrap;}
+.tournament .discipline { color: #FFF;  font-weight: 700; font-size: 15px;padding-left: 15px; text-shadow: 1px 1px 4px #000000; font-size: 14px; line-height: 24px;}
+.tournament .date { color: white; font-weight: 700; }
+.tournament .place { color: white; opacity: 0.8; }
+    
+.tournament .nameplace { padding-left: 15px; height: 48px; background-color: rgba(255,255,255,0.9); color: #000; }
+.tournament .namevenue { min-width: 170px; margin-top: 3px; text-transform: uppercase; font-weight: 700; font-size: 15px; white-space: nowrap; }
+.tournament .venue { text-transform: none; color: #000; opacity: 0.6; font-weight: normal; font-size: 14px; }
+.tournament .nameborder { display: flex; align-items: stretch; height: 100%;  }
+    
+
+.borders { display: flex; flex-direction: row; align-items: flex-start; justify-content: flex-start; background: transparent url(https://cuescore.com/img/scoreboard/triangle.svg) left top no-repeat; opacity: 0.9; padding-left: 26px; padding-right: 26px; height: 48px; }
+.border1 { width: 48px; height: 18px;  transform: skewX(-60deg) rotate(-90deg); margin-top: 15px; }
+.border2 { width: 48px; height: 12px;  transform: skewX(-60deg) rotate(-90deg); margin-top: 18px; margin-left: -34px;  }
+.border3 { width: 28px; }
+    
+#streamoverlay { }
+#scoreboardBox { transition: opacity 3s ease-in-out; opacity: 1;
+ position: fixed; bottom: 0; left: 12.5%; width: 75%; height: 75px; color: #fff; font-size: 18px; line-height: 39px; text-align: center;
+ background-image: url(../img/scoreboard/scoreboard-left.svg), url(../img/scoreboard/scoreboard-right.svg);
+ background-position: left bottom, right bottom;
+ background-repeat: no-repeat, no-repeat;
+ background-size: 124px;
+ padding-left: 123px;
+ padding-right: 123px;  
+ }
+#scoreboardBox.waiting { opacity: 1; }
+#scorePlayerA, #scorePlayerB { flex-basis: 72px; width: 72px; height: 39px; background: transparent url(https://cuescore.com/img/scoreboard/score-background.png) left top no-repeat; font-size: 24px; font-weight: 700; text-align: center; }
+  
+#namePlayerA, #namePlayerB { font-weight: 700; line-height: 46px; flex-basis:  30%; flex-grow: 2; padding: 0 20px; line-height: 39px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#namePlayerA { text-align: right;}
+#namePlayerB { text-align: left; }
+#namePlayerA .handicap, #namePlayerB .handicap { font-weight: normal; color: rgba(255,255,255,0.54); }
+.separator { flex-basis: 20px; opacity: 0.54; font-weight: 900;}
+
+
+
+div.inning-line { position: absolute; top: 52px; height: 37px; color: #d4af37; font-size: 18px; font-weight: 600; line-height: 37px; }
+div.inning-line span { color: #d4af37; }
+#inningsA { right: 877px; text-align: right; }
+#inningsB { left: 877px; text-align: left; }
+    
+div.borderline { height: 4px; background-image: linear-gradient(to right, color: #45DBFE;));  }
+div.borderline div { position: relative; color: #d4af37; height: 4px; width: 100%; display: ; }
+
+div.line1 { position: relative; top: -48px; width: 100%; }
+div.line1 div.imgPlayerA {
+  background: url(../img/scoreboard/hexagon.svg) no-repeat top left;
+  background-size: contain;  position: absolute; left: -48px; width: 68px; height: 78.5px; center center / cover no-repeat; filter: drop-shadow(0 1px 6px rgba(50,50,50,.8)); }
+div.line1 div.imgPlayerB { 
+  background: url(../img/scoreboard/hexagon.svg) no-repeat top left;
+  background-size: contain;  position: absolute; right: -48px; width: 68px; height: 78.5px; center center / cover no-repeat; filter: drop-shadow(0 1px 6px rgba(50,50,50,.8)); }
+div.line2 { display: flex; justify-content: space-between; background: #090909; width: 100%; }
+div.line3 { display: flex; justify-content: space-between; height: 32px; width: calc(100% + 96px); background-color: #020202; margin-left: -48px;  }
+div.line3 div { line-height: 32px; color: #d4af37; opacity: 0.54; font-size: 16px; font-weight: 900; text-transform: uppercase; flex-basis: 200px; }
+#table, #avgIngB { text-align: left; color: #d4af37; font-weight: 700; white-space: nowrap;}
+#matchinfo {color: #d4af37; font-weight: 700; white-space: nowrap; }
+#round, #avgIngA { text-align: right; }
+#avgIngA, #avgIngB { flex-grow: 2; text-transform: none; white-space: nowrap; opacity: 1; color: rgba(255,255,255,0.54); }
+#avgIngA span, #avgIngB span { color: #d4af37; }
+
+	</style>
+</head>
+<body>  
+<div id="streamoverlay">  
+  <div id="scoreboardBox">
+    <div class="borderline"><div></div></div>
+	<div class="line1">
+      <div class="imgPlayerA" ><div class="flagA" ></div></div>
+      <div class="imgPlayerB" ><div class="flagB" ></div></div>
+    </div>
+    <div class="line2">
+      <div id="namePlayerA" class="name"><span class="firstname"></span> <span class="lastname"></span> <span class="handicap"></span></div>
+      <div id="scorePlayerA"></div>
+      <div class="separator">-</div>
+      <div id="scorePlayerB"></div>
+      <div id="namePlayerB" class="name"> <span class="lastname"></span> <span class="handicap"></span></div>
+    </div>
+    <div class="line3">
+      <div id="table"><span>Empire Bar & Pool</span></div>
+      <div id="avgIngA" style="display: none;">Innings <span class="innings"></span> &nbsp; Average <span class="average"></span></div>
+      <div id="matchinfo"><span></span></div>
+      <div id="avgIngB" style="display: none;">Innings <span class="innings"></span> &nbsp; Average <span class="average"></span></div>
+      <div id="round"><span></span></div>  
+    </div>
+  </div>  
+ </div>  
+</body>
+</html>
